@@ -58,6 +58,17 @@ make
 make run
 ```
 
+## Controls
+
+| Key | Action                                         |
+| --- | ---------------------------------------------- |
+| `1` | Wireframe with red vertex dots and green lines |
+| `2` | White wireframe                                |
+| `3` | Filled faces, each with a different colour     |
+| `4` | Filled faces with a black wireframe overlay    |
+| `c` | Enable back-face culling                       |
+| `d` | Disable back-face culling                      |
+
 ## Project Status
 
 > Version 1.0 is currently in progress.
