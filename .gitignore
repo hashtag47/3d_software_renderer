@@ -1,0 +1,12 @@
+# Project assets
+assets/
+
+# Compiled binary and build files
+renderer
+*.o
+build/
+
+# Editor and OS files
+.vscode/
+.DS_Store
+
