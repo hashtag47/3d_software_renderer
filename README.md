@@ -12,6 +12,10 @@
 
 ---
 
+## Assets
+
+Third-party assets are not included in this repository due to licensing restrictions. The renderer runs out of the box using the built-in mesh.
+
 ## About
 
 This project is a standalone **3D software rendering engine** written from scratch in C, without graphics APIs such as OpenGL or DirectX. It is based on the course by **Gustavo Pezzi**, and extends the original code with the following optimizations:
