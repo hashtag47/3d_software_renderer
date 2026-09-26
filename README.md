@@ -4,6 +4,9 @@
 
 [![C](https://img.shields.io/badge/Language-C-A8B9CC?logo=c&logoColor=white)](<https://en.wikipedia.org/wiki/C_(programming_language)>)
 [![Make](https://img.shields.io/badge/Build-Make-427819?logo=gnu&logoColor=white)](https://www.gnu.org/software/make/)
+---
+
+## Demo
 <img src="https://img.shields.io/badge/Version-1.0%20in%20progress-orange?logo=git&logoColor=white" alt="Version 1.0 in progress">
 
 ![Demo](docs/demo.gif)
