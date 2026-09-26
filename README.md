@@ -6,7 +6,7 @@
 [![Make](https://img.shields.io/badge/Build-Make-427819?logo=gnu&logoColor=white)](https://www.gnu.org/software/make/)
 <img src="https://img.shields.io/badge/Version-1.0%20in%20progress-orange?logo=git&logoColor=white" alt="Version 1.0 in progress">
 
----
+</div>
 
 ## Demo
 
