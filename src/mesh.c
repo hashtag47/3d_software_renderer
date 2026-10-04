@@ -124,3 +124,18 @@ void load_obj_file_data(char* filename) {
 	fclose(fp);
 	printf("Loaded: %d vertex, %d faces.", array_length(mesh.vertices), array_length(mesh.faces));
 }
+
+// void load_obj_file_z_up(char* filename) {
+// 	FILE* fp = fopen(filename, "r");
+// 	if(fp != NULL) {
+// 		printf("Cannot open the file: %s", filename);
+// 		return;
+// 	} else {
+// 		mesh.vertices = NULL;
+// 		mesh.faces = NULL;
+
+// 		char line_max_counts[100];
+
+
+// 	}
+// }

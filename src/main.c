@@ -191,27 +191,27 @@ void update(void){
 	// mesh.irregular_scale_axis.z = 0.15f;
 
 	float seconds = SDL_GetTicks() / 1000.f;
-	mesh.scale_factor = 1.0f * sinf(seconds * 2.0f);
-	float t = seconds * 3.0f;
-	mesh.irregular_scale_axis.x = 1.0f + 0.2f * sinf(t);
-	mesh.irregular_scale_axis.y = 1.0f + 0.2f * sinf(t + 2.09f);  // +1/3 of a cycle
-	mesh.irregular_scale_axis.z = 1.0f + 0.2f * sinf(t + 4.19f);  // +2/3 of a cycle
+	// mesh.scale_factor = 1.0f * sinf(seconds * 2.0f);
+	// float t = seconds * 3.0f;
+	// mesh.irregular_scale_axis.x = 1.0f + 0.2f * sinf(t);
+	// mesh.irregular_scale_axis.y = 1.0f + 0.2f * sinf(t + 2.09f);  // +1/3 of a cycle
+	// mesh.irregular_scale_axis.z = 1.0f + 0.2f * sinf(t + 4.19f);  // +2/3 of a cycle
 
 	//NOTE: Test on arbitrary rotation
 	mesh.irregular_rotate_angle  = seconds;
 
-	float tilt = 0.5f;                 // tilt in radians (~29°)
-	float precession = seconds * 0.7f; // how fast the axis circles
+	// float tilt = 0.5f;                 // tilt in radians (~29°)
+	// float precession = seconds * 0.7f; // how fast the axis circles
 
-	mesh.irregular_rotation_axis.x = sinf(tilt) * cosf(precession);
-	mesh.irregular_rotation_axis.y = cosf(tilt);
-	mesh.irregular_rotation_axis.z = sinf(tilt) * sinf(precession);
+	// mesh.irregular_rotation_axis.x = sinf(tilt) * cosf(precession);
+	// mesh.irregular_rotation_axis.y = cosf(tilt);
+	// mesh.irregular_rotation_axis.z = sinf(tilt) * sinf(precession);
 	// NOTE: Only for testing z axis rotate direction
-	// mesh.irregular_rotation_axis.x = 0.f;
-	// mesh.irregular_rotation_axis.y = 0.f;
-	// mesh.irregular_rotation_axis.z = 1.0f;
+	mesh.irregular_rotation_axis.x = 0.2f;
+	mesh.irregular_rotation_axis.y = 0.5f;
+	mesh.irregular_rotation_axis.z = 0.3f;
 
-	//mesh.translation.x += 0.01f;
+	mesh.translation.x += 0.01f;
 	mesh.translation.z = 5.0f;
 
 	//Create a scale matrix that will be used to multiply the mesh vertices
@@ -227,25 +227,6 @@ void update(void){
 	//Create a translation matrix that will be used by translation
 	mat4_t translation_matrix = mat4_make_translate(mesh.translation.x, mesh.translation.y, mesh.translation.z);
 	
-	/////////////////////////////////////////////////////////////////////////////////////
-	// 9*9*9 Points Related Part
-	// for(int i = 0; i < N_POINTS; ++i ) {
-	// 	vec3_t point = cube_points[i];
-
-	// 	vec3_t transformed_point = vec3_rotate_x(point, cube_rotation.x);
-	// 	transformed_point = vec3_rotate_y(transformed_point, cube_rotation.y);
-	// 	transformed_point = vec3_rotate_z(transformed_point, cube_rotation.z);
-
-	// 	//Translate the point away from the camera 
-	// 	transformed_point.z -= camera_position.z;
-
-	// 	//project the current point
-	// 	vec2_t projected_point = project(transformed_point);
-
-	// 	//save the projected 2d vector in the array of projected points
-	// 	projected_points[i] = projected_point;
-	// }
-	/////////////////////////////////////////////////////////////////////////////////////
 	//Loop all triangle faces of our mesh
 	int num_faces = array_length(mesh.faces);
 
@@ -269,27 +250,16 @@ void update(void){
 			//pipeline here: take openGL as reference
 			// local space -> world space -> view space -> clip space -> screen space
 
-			//////////////////////////////////////////////////////////////////////////
-			// NOTE: Replace pure vertex rotation with the scale matrix
-			//////////////////////////////////////////////////////////////////////////
-			// rotation
-			// transformed_vertex = vec3_rotate_x(transformed_vertex, mesh.rotation.x);
-			// transformed_vertex = vec3_rotate_y(transformed_vertex, mesh.rotation.y);
-			// transformed_vertex = vec3_rotate_z(transformed_vertex, mesh.rotation.z);	
-			//////////////////////////////////////////////////////////////////////////
+			// Create a World Matrix combiningg scale, rotation, and translation matrices
+			mat4_t world_matrix = mat4_identity();
 
-			//multiply the scale_matrix by the vertex (scale without rotation)
-			transformed_vertex = mat4_multiply_vec4(scale_matrix, transformed_vertex);
+			//TODO: multiply all matrices and load the world matrix
+			world_matrix = mat4_mul_mat4(scale_matrix, world_matrix);
+			world_matrix = mat4_mul_mat4(rotation_matrix, world_matrix);
+			world_matrix = mat4_mul_mat4(translation_matrix, world_matrix);
 
-			//Rotate the vertex
-			// transformed_vertex = mat4_multiply_vec4(rotation_matrix_x, transformed_vertex);
-			// transformed_vertex = mat4_multiply_vec4(rotation_matrix_y, transformed_vertex);
-			// transformed_vertex = mat4_multiply_vec4(rotation_matrix_z, transformed_vertex);
-			transformed_vertex = mat4_multiply_vec4(rotation_matrix, transformed_vertex);
-
-			//Translate the vertex away from the camera
-			//transformed_vertex.z += 5.0f;
-			transformed_vertex = mat4_multiply_vec4(translation_matrix, transformed_vertex);
+			// Multiply the world matrix by the original vector
+			transformed_vertex = mat4_multiply_vec4(world_matrix, transformed_vertex);
 
 			//save transformed vertex in the array of transformed vertices
 			transformed_vertices[j] = transformed_vertex;

@@ -8,14 +8,14 @@ float vec2_length(vec2_t v) {
 	return sqrt(v.x * v.x + v.y * v.y);
 }
 
-vec2_t vec2_add(vec2_t a, vec2_t b) {
+vec2_t vec2_add(vec2_t a, vec2_t b) { 
 	vec2_t tmp = {
-		.x = a.x + b.x,
+		.x = a.x + b.x, 
 		.y = a.y + b.y
 	};
 	return tmp;
 }
-
+ 
 vec2_t vec2_sub(vec2_t a, vec2_t b) {
 	vec2_t tmp = {
 		.x = a.x - b.x,
@@ -126,7 +126,7 @@ vec3_t vec3_rotate_x(vec3_t v, float angles) {
 	vec3_t rotated_vector = {
 		.x = v.x,
 		.y = v.y * cos(angles) - v.z * sin(angles),
-		.z = v.z * cos(angles) + v.y * sin(angles)
+		.z = v.z * cos(angles) + v.y * sin(angles) 
 	};
 	return rotated_vector;
 };
